@@ -99,6 +99,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            	<groupId>com.fortify.ps.maven.plugin</groupId>
+            	<artifactId>sca-maven-plugin</artifactId>
+            	<version>4.30</version>
+            	<configuration>
+                	<findbugs>true</findbugs>
+                	<verbose>true</verbose>
+                	<skipTests>true</skipTests>
+            	</configuration>
+        	</plugin>
 		</plugins>
 	</build>
 
