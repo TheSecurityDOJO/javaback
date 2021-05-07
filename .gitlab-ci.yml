@@ -7,7 +7,7 @@ variables:
   PROJECT_BUILD_IMAGE: "maven:3-openjdk-11"
   PROJECT_BUILD_SCRIPT: "mvn clean install -Dmaven.test.skip=true"
   PROJECT_BUILD_LIBS: ""
-  PROJECT_BUILD_ARTIFACTS: "~/.m2/repository"
+  PROJECT_BUILD_ARTIFACTS: "$HOME/.m2/repository"
   FORTIFY_SSC_URL: "http://ssc:8080/"
   FORTIFY_ATTRIBUTES: ""
   FORTIFY_ISSUE_TEMPLATE: "SOGETI Issue Template"
