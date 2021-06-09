@@ -32,26 +32,12 @@ Content-Type: application/json
 
 Send the request, and ...... TADAM!
 
-### SPEED RUN
-
-**Prerequisites**: send a file with BD1.jpg
-
-```TXT
-curl 'https://fakedeals.ctfdemo.agile4security.io/api/upload' \
-  -H 'accept: text/plain' \
-  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryjbZC84C37sSjE8Xw' \
-  -H 'accept-language: fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7' \
-  -H 'cookie: JSESSIONID=BF11716E7CF0305F7D7B78C93909164B' \
-  --data-raw $'------WebKitFormBoundaryjbZC84C37sSjE8Xw\r\nContent-Disposition: form-data; name="file"; filename="BD1.jpg"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundaryjbZC84C37sSjE8Xw\r\nContent-Disposition: form-data; name="infos"; filename="blob"\r\nContent-Type: application/json\r\n\r\n{"description":"ry","link":"ry"}\r\n------WebKitFormBoundaryjbZC84C37sSjE8Xw--\r\n' \
-  --compressed
-```
-
 
 ## PART 2 (Get application.properties or RCE)
 
 ### SETP 0
 
-Upload the same image twice to get a stack trace
+Upload the same image **with the same name** twice to get a stack trace
 
 ```JAVA
 java.nio.file.FileAlreadyExistsException: /opt/app/tmp/BD-Blagues-toto.jpg
