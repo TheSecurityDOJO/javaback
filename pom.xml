@@ -16,6 +16,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+  		<sonar.projectKey>secdojo_a4s-soft_javalab_1_back_AXxfZcY7WSKEArbSOkuT</sonar.projectKey>
+  		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
 	</properties>
 
 	<dependencies>
