@@ -1,20 +1,68 @@
-sonarqube-check:
-  image: maven:3.6.3-jdk-11
-  variables:
-    SONAR_TOKEN: 2243895ba7c3226745bdcab4d1f7b66f0815a65c
-    SONAR_HOST_URL: https://sonarq-ent.kube.agile4security.io
-    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
-    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
-  cache:
-    key: "${CI_JOB_NAME}"
-    paths:
-      - .sonar/cache
-  script: 
-    - mvn verify sonar:sonar
-  allow_failure: true
+variables:
+  PROJECT_VERSION: "0.0.1"
+  PROJECT_NAME: "LAB-FAKEDEALS"
+  PROJECT_IMAGE_NAME: ""
+  PROJECT_BLOCK_ON_SECURITY_ISSUES: "false"
+  PROJECT_LANGUAGES: "JAVA"
+  PROJECT_BUILD_IMAGE: "debian"
+  PROJECT_BUILD_SCRIPT: "ls -al"
+  PROJECT_BUILD_LIBS: ""
+  PROJECT_BUILD_ARTIFACTS: ""
+  FORTIFY_SSC_URL: "https://ssc.kube.agile4security.io/"
+  FORTIFY_ATTRIBUTES: ""
+  FORTIFY_ISSUE_TEMPLATE: "SOGETI Issue Template"
+  SAST_FORTIFY_ENABLE: "false"
+  SAST_FORTIFY_EXCLUDES: ""
+  SAST_FORTIFY_JVM_OPTIONS: ""
+  SAST_FORTIFY_TOUCHLESS_COMMAND: ""
+  SAST_FORTIFY_HLA: "true"
+  SAST_FORTIFY_JAVA_VERSION: ""
+  SAST_FORTIFY_PHP_VERSION: ""
+  SAST_FORTIFY_PYTHON_VERSION: ""
+  SAST_FORTIFY_PASS_FAIL_POLICY: ""
+  # full, partial or no
+  SAST_FORTIFY_SCANCENTRAL_ENABLE: ""
+  SAST_FORTIFY_SCANCENTRAL_CONTROLLER_URL: ""
+  SAST_FORTIFY_SCANCENTRAL_BUILD_TOOL: ""
+  SAST_FORTIFY_SCANCENTRAL_BUILD_FILE: ""
+  SAST_FORTIFY_SCANCENTRAL_WAIT_FOR_SCAN_COMPLETE: ""
+  # Linux: 7bbe4042-aea4-4bf3-9997-c65dca44c1bb & Windows: 57fa452d-ca68-4609-a40c-6975af256f7d
+  SAST_FORTIFY_SCANCENTRAL_POOL: ""
+  OSS_ODC_ENABLE: "false"
+  OSS_ODC_EXCLUDES: ""
+  OSS_ODC_PASS_FAIL_POLICY: ""
+  OSS_ODT_ENABLE: ""
+  OSS_ODT_DEPENDENCY_MANAGER: ""
+  OSS_ODT_URL: ""
+  OSS_ODT_PASS_FAIL_POLICY: ""
+  OSS_NEXUS_IQ_ENABLE: "false"
+  OSS_NEXUS_IQ_STAGE: "release"
+  OSS_NEXUS_IQ_EXCLUDES: ""
+  OSS_NEXUS_IQ_URL: "https://iq.kube.agile4security.io/"
+  OSS_NEXUS_IQ_PASS_FAIL_POLICY: ""
+  CQ_SONARQUBE_ENABLE: "false"
+  CQ_SONARQUBE_URL: ""
+  CQ_SONARQUBE_PASS_FAIL_POLICY: ""
+  CQ_SONARQUBE_ENT_ENABLE: "true"
+  CQ_SONARQUBE_ENT_PASS_FAIL_POLICY: ""
+  CIST_TRIVY_ENABLE: ""
+  CIST_TRIVY_PASS_FAIL_POLICY: ""
+  DAST_ACUNETIX_ENABLE: ""
+  DAST_ACUNETIX_URL: ""
+  DAST_ACUNETIX_SCAN_TYPE: ""
+  DAST_ACUNETIX_WAIT_FOR_SCAN_COMPLETE: ""
+  DAST_ACUNETIX_TARGET_ADDRESS: ""
+  DAST_ACUNETIX_TARGET_DESCRIPTION: ""
+  DAST_ACUNETIX_TARGET_CRITICALITY: ""
+  DAST_ACUNETIX_PASS_FAIL_POLICY: ""
+
+# tags all for all available runners otherwise use the specific runner tag 
+.general-tags:
   tags:
     - all
-  only:
-    - merge_requests
-    - master
-    - develop
+  #script: echo "no tags"
+
+include:
+  - project: "secdojo/secgates-gitlab-ci"
+    ref: master
+    file: ".gitlab-ci-base.yml"
