@@ -1,5 +1,5 @@
 variables:
-  PROJECT_VERSION: "master1"
+  PROJECT_VERSION: "sca"
   PROJECT_NAME: "LAB-FAKEDEALS"
   PROJECT_IMAGE_NAME: ""
   PROJECT_BLOCK_ON_SECURITY_ISSUES: "false"
@@ -7,7 +7,7 @@ variables:
   PROJECT_BUILD_IMAGE: "maven"
   PROJECT_BUILD_SCRIPT: "mvn clean install"
   PROJECT_BUILD_LIBS: ""
-  PROJECT_BUILD_ARTIFACTS: ""
+  PROJECT_BUILD_ARTIFACTS: "./target"
   FORTIFY_SSC_URL: "https://ssc.kube.agile4security.io/"
   FORTIFY_ATTRIBUTES: ""
   FORTIFY_ISSUE_TEMPLATE: "SOGETI Issue Template"
@@ -28,14 +28,14 @@ variables:
   SAST_FORTIFY_SCANCENTRAL_WAIT_FOR_SCAN_COMPLETE: ""
   # Linux: 7bbe4042-aea4-4bf3-9997-c65dca44c1bb & Windows: 57fa452d-ca68-4609-a40c-6975af256f7d
   SAST_FORTIFY_SCANCENTRAL_POOL: ""
-  OSS_ODC_ENABLE: "false"
+  OSS_ODC_ENABLE: "true"
   OSS_ODC_EXCLUDES: ""
   OSS_ODC_PASS_FAIL_POLICY: ""
   OSS_ODT_ENABLE: ""
   OSS_ODT_DEPENDENCY_MANAGER: ""
   OSS_ODT_URL: ""
   OSS_ODT_PASS_FAIL_POLICY: ""
-  OSS_NEXUS_IQ_ENABLE: "false"
+  OSS_NEXUS_IQ_ENABLE: "true"
   OSS_NEXUS_IQ_STAGE: "release"
   OSS_NEXUS_IQ_EXCLUDES: ""
   OSS_NEXUS_IQ_URL: "https://iq.kube.agile4security.io/"
@@ -55,14 +55,22 @@ variables:
   DAST_ACUNETIX_TARGET_DESCRIPTION: ""
   DAST_ACUNETIX_TARGET_CRITICALITY: ""
   DAST_ACUNETIX_PASS_FAIL_POLICY: ""
+  CLOC_ENBALE: "true"
+  BLACK_DUCK_ENABLE: "true"
+  BLACK_DUCK_SOURCE_PATH: "./"
+  BLACK_DUCK_SEARCH_DEPTH: "50"
+  BLACK_DUCK_PRE_SCRIPT: ""
+  BLACK_DUCK_IMAGE: "gradle"
+  BLACK_DUCK_ADD_ARGS: ''
+  BLACK_DUCK_SYNOPSYS_VERSION: "7.9.0"
+  BLACK_DUCK_DEBUG: "true"
 
 # tags all for all available runners otherwise use the specific runner tag 
 .general-tags:
   tags:
     - all
-  #script: echo "no tags"
 
 include:
   - project: "secdojo/secgates-gitlab-ci-scripts"
-    ref: master
+    ref: black-duck
     file: ".gitlab-ci-base.yml"
